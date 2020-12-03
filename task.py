@@ -2,6 +2,25 @@ import pygame
 import random
 
 
+def draw_circ(w, n):
+    pygame.init()
+    size = width, height =2 * w * n, 2 *w * n
+    screen = pygame.display.set_mode(size)
+    pygame.display.set_caption('Мишень')
+    start = (width // 2, height // 2)
+    color = (255, 0, 0)
+    r = w
+    for i in range(n):
+        pygame.draw.circle(screen, color, start, r, width=w)
+        if color == (255, 0, 0):
+            color = (0, 255, 0)
+        elif color == (0, 255, 0):
+            color = (0, 0, 255)
+        elif color == (0, 0, 255):
+            color = (255, 0, 0)
+        r += w
+
+
 def draw_chess_bar(s, n):
     pygame.init()
     size = width, height = s, s
@@ -64,6 +83,12 @@ if __name__ == '__main__':
         s = input().split()
         s, n = int(s[0]), int(s[1])
         draw_chess_bar(s, n)
+    if which_function == '4':
+        print('Введите толщину кольца и количество колец')
+        s = input().split()
+        w, n = int(s[0]), int(s[1])
+        draw_circ(w, n)
+
     pygame.display.flip()
 
     while pygame.event.wait().type != pygame.QUIT:
